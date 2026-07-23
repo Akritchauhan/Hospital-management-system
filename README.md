@@ -4,9 +4,6 @@
 
 ## Screenshots
 
-### Homepage
-![homepage snap](https://raw.githubusercontent.com/Akritchauhan/Hospital-management-system/main/static/screenshots/homepage.png)
-
 ### Admin Dashboard
 ![dashboard snap](https://raw.githubusercontent.com/Akritchauhan/Hospital-management-system/main/static/screenshots/admin_dashboard.png)
 
