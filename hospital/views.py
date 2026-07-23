@@ -69,10 +69,10 @@ def doctor_signup_view(request):
             user.save()
             doctor=doctorForm.save(commit=False)
             doctor.user=user
-            doctor=doctor.save()
+            doctor.save()
             my_doctor_group = Group.objects.get_or_create(name='DOCTOR')
             my_doctor_group[0].user_set.add(user)
-        return HttpResponseRedirect('doctorlogin')
+            return HttpResponseRedirect('doctorlogin')
     return render(request,'hospital/doctorsignup.html',context=mydict)
 
 
@@ -90,10 +90,10 @@ def patient_signup_view(request):
             patient=patientForm.save(commit=False)
             patient.user=user
             patient.assignedDoctorId=request.POST.get('assignedDoctorId')
-            patient=patient.save()
+            patient.save()
             my_patient_group = Group.objects.get_or_create(name='PATIENT')
             my_patient_group[0].user_set.add(user)
-        return HttpResponseRedirect('patientlogin')
+            return HttpResponseRedirect('patientlogin')
     return render(request,'hospital/patientsignup.html',context=mydict)
 
 
@@ -187,7 +187,6 @@ def delete_doctor_from_hospital_view(request,pk):
     doctor=models.Doctor.objects.get(id=pk)
     user=models.User.objects.get(id=doctor.user_id)
     user.delete()
-    doctor.delete()
     return redirect('admin-view-doctor')
 
 
@@ -238,8 +237,7 @@ def admin_add_doctor_view(request):
 
             my_doctor_group = Group.objects.get_or_create(name='DOCTOR')
             my_doctor_group[0].user_set.add(user)
-
-        return HttpResponseRedirect('admin-view-doctor')
+            return HttpResponseRedirect('admin-view-doctor')
     return render(request,'hospital/admin_add_doctor.html',context=mydict)
 
 
@@ -268,7 +266,6 @@ def reject_doctor_view(request,pk):
     doctor=models.Doctor.objects.get(id=pk)
     user=models.User.objects.get(id=doctor.user_id)
     user.delete()
-    doctor.delete()
     return redirect('admin-approve-doctor')
 
 
@@ -302,7 +299,6 @@ def delete_patient_from_hospital_view(request,pk):
     patient=models.Patient.objects.get(id=pk)
     user=models.User.objects.get(id=patient.user_id)
     user.delete()
-    patient.delete()
     return redirect('admin-view-patient')
 
 
@@ -356,8 +352,7 @@ def admin_add_patient_view(request):
 
             my_patient_group = Group.objects.get_or_create(name='PATIENT')
             my_patient_group[0].user_set.add(user)
-
-        return HttpResponseRedirect('admin-view-patient')
+            return HttpResponseRedirect('admin-view-patient')
     return render(request,'hospital/admin_add_patient.html',context=mydict)
 
 
@@ -388,7 +383,6 @@ def reject_patient_view(request,pk):
     patient=models.Patient.objects.get(id=pk)
     user=models.User.objects.get(id=patient.user_id)
     user.delete()
-    patient.delete()
     return redirect('admin-approve-patient')
 
 
@@ -620,7 +614,7 @@ def doctor_view_patient_view(request):
 def search_view(request):
     doctor=models.Doctor.objects.get(user_id=request.user.id) #for profile picture of doctor in sidebar
     # whatever user write in search box we get in query
-    query = request.GET['query']
+    query = request.GET.get('query', '')
     patients=models.Patient.objects.all().filter(status=True,assignedDoctorId=request.user.id).filter(Q(symptoms__icontains=query)|Q(user__first_name__icontains=query))
     return render(request,'hospital/doctor_view_patient.html',{'patients':patients,'doctor':doctor})
 
@@ -747,11 +741,13 @@ def patient_book_appointment_view(request):
             appointment.patientName=request.user.first_name #----user can choose any patient but only their info will be stored
             appointment.status=False
             appointment.save()
-        return HttpResponseRedirect('patient-view-appointment')
+            return HttpResponseRedirect('patient-view-appointment')
     return render(request,'hospital/patient_book_appointment.html',context=mydict)
 
 
 
+@login_required(login_url='patientlogin')
+@user_passes_test(is_patient)
 def patient_view_doctor_view(request):
     doctors=models.Doctor.objects.all().filter(status=True)
     patient=models.Patient.objects.get(user_id=request.user.id) #for profile picture of patient in sidebar
@@ -759,11 +755,13 @@ def patient_view_doctor_view(request):
 
 
 
+@login_required(login_url='patientlogin')
+@user_passes_test(is_patient)
 def search_doctor_view(request):
     patient=models.Patient.objects.get(user_id=request.user.id) #for profile picture of patient in sidebar
     
     # whatever user write in search box we get in query
-    query = request.GET['query']
+    query = request.GET.get('query', '')
     doctors=models.Doctor.objects.all().filter(status=True).filter(Q(department__icontains=query)| Q(user__first_name__icontains=query))
     return render(request,'hospital/patient_view_doctor.html',{'patient':patient,'doctors':doctors})
 
