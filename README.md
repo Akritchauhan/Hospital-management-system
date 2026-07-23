@@ -10,9 +10,6 @@
 ### Invoice
 ![invoice snap](https://raw.githubusercontent.com/Akritchauhan/Hospital-management-system/main/static/screenshots/invoice.png)
 
-### Doctor List
-![doctor snap](https://raw.githubusercontent.com/Akritchauhan/Hospital-management-system/main/static/screenshots/admin_doctor.png)
-
 ---
 
 ## Features & Roles
