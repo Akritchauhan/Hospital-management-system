@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from django.shortcuts import render,redirect,reverse
 from . import forms,models
 from django.db.models import Sum
@@ -453,9 +454,13 @@ def discharge_patient_view(request,pk):
 
 #--------------for discharge patient bill (pdf) download and printing
 import io
+# pyrefly: ignore [import-unresolved, missing-import]
 from xhtml2pdf import pisa
+# pyrefly: ignore [import-unresolved]
 from django.template.loader import get_template
+# pyrefly: ignore [import-unresolved]
 from django.template import Context
+# pyrefly: ignore [import-unresolved]
 from django.http import HttpResponse
 
 

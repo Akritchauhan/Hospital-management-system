@@ -1,81 +1,91 @@
-
-# Hospital Management
-![developer](https://img.shields.io/badge/Developed%20By%20%3A-Sumit%20Kumar-red)
+# Hospital Management System
+![developer](https://img.shields.io/badge/Developed%20By%20%3A-Akrit%20Chauhan-blue)
 ---
-## screenshots
+
+## Screenshots
+
 ### Homepage
-![homepage snap](https://github.com/sumitkumar1503/hospitalmanagement/blob/master/static/screenshots/homepage.png?raw=true)
+![homepage snap](https://raw.githubusercontent.com/Akritchauhan/Hospital-management-system/main/static/screenshots/homepage.png)
+
 ### Admin Dashboard
-![dashboard snap](https://github.com/sumitkumar1503/hospitalmanagement/blob/master/static/screenshots/admin_dashboard.png?raw=true)
+![dashboard snap](https://raw.githubusercontent.com/Akritchauhan/Hospital-management-system/main/static/screenshots/admin_dashboard.png)
+
 ### Invoice
-![invoice snap](https://github.com/sumitkumar1503/hospitalmanagement/blob/master/static/screenshots/invoice.png?raw=true)
-### Doctor list
-![doctor snap](https://github.com/sumitkumar1503/hospitalmanagement/blob/master/static/screenshots/admin_doctor.png?raw=true)
----
-## Functions
-### Admin
-- Signup their account. Then Login (No approval Required).
-- Can register/view/approve/reject/delete doctor (approve those doctor who applied for job in their hospital).
-- Can admit/view/approve/reject/discharge patient (discharge patient when treatment is done).
-- Can Generate/Download Invoice pdf (Generate Invoice according to medicine cost, room charge, doctor charge and other charge).
-- Can view/book/approve Appointment (approve those appointments which is requested by patient).
+![invoice snap](https://raw.githubusercontent.com/Akritchauhan/Hospital-management-system/main/static/screenshots/invoice.png)
 
-### Doctor
-- Apply for job in hospital. Then Login (Approval required by hospital admin, Then only doctor can login).
-- Can only view their patient details (symptoms, name, mobile ) assigned to that doctor by admin.
-- Can view their discharged(by admin) patient list.
-- Can view their Appointments, booked by admin.
-- Can delete their Appointment, when doctor attended their appointment.
-
-### Patient
-- Create account for admit in hospital. Then Login (Approval required by hospital admin, Then only patient can login).
-- Can view assigned doctor's details like ( specialization, mobile, address).
-- Can view their booked appointment status (pending/confirmed by admin).
-- Can book appointments.(approval required by admin)
-- Can view/download Invoice pdf (Only when that patient is discharged by admin).
+### Doctor List
+![doctor snap](https://raw.githubusercontent.com/Akritchauhan/Hospital-management-system/main/static/screenshots/admin_doctor.png)
 
 ---
 
-## HOW TO RUN THIS PROJECT
-- Install Python(3.7.6) (Dont Forget to Tick Add to Path while installing Python)
-- Open Terminal and Execute Following Commands :
-```
-pip install django==3.0.5
-pip install django-widget-tweaks
-pip install xhtml2pdf
-```
-- Download This Project Zip Folder and Extract it
-- Move to project folder in Terminal. Then run following Commands :
-```
-py manage.py makemigrations
-py manage.py migrate
-py manage.py runserver
-```
-- Now enter following URL in Your Browser Installed On Your Pc
-```
-http://127.0.0.1:8000/
+## Features & Roles
+
+### Admin Module
+- **Account Creation**: Signup & immediate access (no external approval required).
+- **Doctor Management**: Register, view, approve, reject, and remove doctors (approval workflow for applicant doctors).
+- **Patient Management**: Admit, view, approve, reject, and discharge patients (with date tracking & fee calculation).
+- **Invoice Generation**: Generate & download PDF invoices detailing room charges, doctor fees, medicine costs, and misc expenses.
+- **Appointment Management**: View, create, and approve patient-requested appointment slots.
+
+### Doctor Module
+- **Application & Approval**: Apply for a hospital role; access granted upon Admin approval.
+- **Patient Tracking**: View assigned active patient profiles (symptoms, contact info, admit status).
+- **Discharged Records**: Review history of discharged patients assigned to the doctor.
+- **Appointment Schedule**: View and manage confirmed patient appointments.
+
+### Patient Module
+- **Hospital Registration**: Create an account for admission; access granted upon Admin approval.
+- **Doctor Details**: View assigned doctor details (specialization, department, contact information).
+- **Appointment Booking**: Request appointment slots with doctors (requires Admin confirmation).
+- **Billing & Discharge**: View and download final PDF invoice upon discharge.
+
+---
+
+## How to Run This Project
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Akritchauhan/Hospital-management-system.git
+   cd Hospital-management-system
+   ```
+
+2. **Install Dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Apply Database Migrations**:
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+4. **Run Automated Tests**:
+   ```bash
+   python manage.py test
+   ```
+
+5. **Start Development Server**:
+   ```bash
+   python manage.py runserver
+   ```
+   Access the web app at `http://127.0.0.1:8000/`.
+
+---
+
+## Configuration
+
+### Contact Us Email Setup
+To enable email notifications on the contact page, configure the following settings in `hospitalmanagement/settings.py`:
+```python
+EMAIL_HOST_USER = 'your_email@gmail.com'
+EMAIL_HOST_PASSWORD = 'your_app_password'
+EMAIL_RECEIVING_USER = ['destination_email@gmail.com']
 ```
 
-## CHANGES REQUIRED FOR CONTACT US PAGE
-- In settins.py file, You have to give your email and password
-```
-EMAIL_HOST_USER = 'youremail@gmail.com'
-EMAIL_HOST_PASSWORD = 'your email password'
-EMAIL_RECEIVING_USER = 'youremail@gmail.com'
-```
-- Login to gmail through host email id in your browser and open following link and turn it ON
-```
-https://myaccount.google.com/lesssecureapps
-```
-## Drawbacks/LoopHoles
-- Any one can be Admin. There is no Approval required for admin account. So you can disable admin signup process and use any logic like creating superuser.
-- There should be at least one doctor in hospital before admitting patient. So first add doctor.
-- On update page of doctor/patient you must have to update password.
+---
 
-## Disclaimer
-This project is developed for demo purpose and it's not supposed to be used in real application.
+## Repository & Maintainer
 
-## Feedback
-Any suggestion and feedback is welcome. You can message me on facebook
-- [Contact on Facebook](https://fb.com/sumit.luv)
-- [Subscribe my Channel LazyCoder On Youtube](https://youtube.com/lazycoders)
+- **Repository**: [https://github.com/Akritchauhan/Hospital-management-system](https://github.com/Akritchauhan/Hospital-management-system)
+- **Maintainer**: Akrit Chauhan
