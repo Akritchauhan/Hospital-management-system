@@ -3,7 +3,7 @@ from django.shortcuts import render,redirect,reverse
 from . import forms,models
 from django.db.models import Sum
 from django.contrib.auth.models import Group
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.core.mail import send_mail
 from django.contrib.auth.decorators import login_required,user_passes_test
 from datetime import datetime,timedelta,date
@@ -471,20 +471,23 @@ def render_to_pdf(template_src, context_dict):
 
 def download_pdf_view(request,pk):
     dischargeDetails=models.PatientDischargeDetails.objects.all().filter(patientId=pk).order_by('-id')[:1]
+    if not dischargeDetails.exists():
+        raise Http404("Discharge details not found for this patient.")
+    dischargeDetail = dischargeDetails[0]
     dict={
-        'patientName':dischargeDetails[0].patientName,
-        'assignedDoctorName':dischargeDetails[0].assignedDoctorName,
-        'address':dischargeDetails[0].address,
-        'mobile':dischargeDetails[0].mobile,
-        'symptoms':dischargeDetails[0].symptoms,
-        'admitDate':dischargeDetails[0].admitDate,
-        'releaseDate':dischargeDetails[0].releaseDate,
-        'daySpent':dischargeDetails[0].daySpent,
-        'medicineCost':dischargeDetails[0].medicineCost,
-        'roomCharge':dischargeDetails[0].roomCharge,
-        'doctorFee':dischargeDetails[0].doctorFee,
-        'OtherCharge':dischargeDetails[0].OtherCharge,
-        'total':dischargeDetails[0].total,
+        'patientName':dischargeDetail.patientName,
+        'assignedDoctorName':dischargeDetail.assignedDoctorName,
+        'address':dischargeDetail.address,
+        'mobile':dischargeDetail.mobile,
+        'symptoms':dischargeDetail.symptoms,
+        'admitDate':dischargeDetail.admitDate,
+        'releaseDate':dischargeDetail.releaseDate,
+        'daySpent':dischargeDetail.daySpent,
+        'medicineCost':dischargeDetail.medicineCost,
+        'roomCharge':dischargeDetail.roomCharge,
+        'doctorFee':dischargeDetail.doctorFee,
+        'OtherCharge':dischargeDetail.OtherCharge,
+        'total':dischargeDetail.total,
     }
     return render_to_pdf('hospital/download_bill.html',dict)
 

@@ -4,7 +4,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>LazyCoder || sumit</title>
+  <title>Hospital Management System</title>
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -65,6 +65,16 @@
       background: #3B5998;
       color: white;
       margin-top: 30px;
+    }
+
+    .fa-linkedin {
+      background: #0077b5;
+      color: white;
+    }
+
+    .fa-envelope {
+      background: #ea4335;
+      color: white;
     }
 
     .fa-whatsapp {
@@ -276,7 +286,7 @@
   <nav class="menu" tabindex="0">
     <div class="smartphone-menu-trigger"></div>
     <header class="avatar">
-      <img src="{% static patient.profile_pic.url %}" alt="Profile Pic" />
+      <img src="{% if patient.profile_pic %}{% static patient.profile_pic.url %}{% else %}{% static 'images/patient.jpg' %}{% endif %}" alt="Profile Pic" />
       <br><br>
       <h6>Patient</h6>
       <h2>{{request.user.first_name}}</h2>
@@ -314,10 +324,10 @@
     <br><br><br><br><br><br><br>
     <footer>
       <p>
-        <a id="ftr" href="https://facebook.com/sumit.luv/" class="fa fa-facebook"></a>
-        <a id="ftr" href="https://api.whatsapp.com/send?phone=919572181024&text=Hello%20Sumit.%0d%0aHow%20are%20you%20%3f%0d%0aI%20came%20from%20your%20website.&source=&data=#" class="fa fa-whatsapp"></a>
-        <a id="ftr" href="https://instagram.com/sumit.luv" class="fa fa-instagram"></a>
-        <a id="ftr" href="https://twitter.com/sumitkumar1503" class="fa fa-twitter"></a>
+        <a id="ftr" href="https://www.linkedin.com/in/akrit-chauhan-b016a1290" class="fa fa-linkedin"></a>
+        <a id="ftr" href="https://api.whatsapp.com/send?phone=919805428201&text=Hello%20Sumit.%0d%0aHow%20are%20you%20%3f%0d%0aI%20came%20from%20your%20website.&source=&data=#" class="fa fa-whatsapp"></a>
+        <a id="ftr" href="mailto:akritchauhan.work@gmail.com" class="fa fa-envelope"></a>
+        <a id="ftr" href="mailto:akritchauhan.work@gmail.com" class="fa fa-envelope"></a>
       </p>
       <br>
       <div class="container">
@@ -325,7 +335,7 @@
           <div class="col-md-12 col-sm-12">
             <div style="color:#ffffff;" class="wow fadeInUp footer-copyright">
               <p>Made in India <br>
-                Copyright &copy; 2020 LazyCoder </p>
+                Copyright &copy; 2026 Akrit Chauhan </p>
             </div>
           </div>
         </div>
@@ -333,8 +343,8 @@
     </footer>
   </main>
   <!--
-  developed By : sumit kumar
-  facebook : fb.com/sumit.luv
+  developed By : Hospital Management System
+  facebook : fb.com/Hospital Management
   youtube : youtube.com/lazycoders
   -->
 

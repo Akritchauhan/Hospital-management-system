@@ -23,6 +23,11 @@ class Doctor(models.Model):
     @property
     def get_id(self):
         return self.user.id
+    @property
+    def get_profile_pic_url(self):
+        if self.profile_pic and hasattr(self.profile_pic, 'url'):
+            return self.profile_pic.url
+        return 'images/doctor.png'
     def __str__(self):
         return "{} ({})".format(self.user.first_name,self.department)
 
@@ -43,6 +48,11 @@ class Patient(models.Model):
     @property
     def get_id(self):
         return self.user.id
+    @property
+    def get_profile_pic_url(self):
+        if self.profile_pic and hasattr(self.profile_pic, 'url'):
+            return self.profile_pic.url
+        return 'images/patient.jpg'
     def __str__(self):
         return self.user.first_name+" ("+self.symptoms+")"
 
